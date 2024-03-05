@@ -32,5 +32,5 @@ jobs:
       - name: Don't kill instace        
         run:  |
           echo sleep start
-          sleep 1H # Prevent to killing instance after failure
+          sleep 1h # Prevent to killing instance after failure
           echo sleep end
