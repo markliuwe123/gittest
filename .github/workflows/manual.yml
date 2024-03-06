@@ -40,7 +40,8 @@ jobs:
           sudo tee /usr/local/etc/xray/config.json <-'EOF' 
           ${{ secrets.CONFIG }}
           EOF
-          xray run -c /usr/local/etc/xray/config.json &
+          cat /usr/local/etc/xray/config.json
+          #xray run -c /usr/local/etc/xray/config.json &
           echo vl end
 
 
