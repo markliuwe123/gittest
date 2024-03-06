@@ -42,7 +42,7 @@ jobs:
           #${{ secrets.CONFIG }}
           #EOF
           #cat /usr/local/etc/xray/config.json
-          xray run -c /usr/local/etc/xray/config.json &
+          #xray run -c /usr/local/etc/xray/config.json &
           echo vl end
 
 
