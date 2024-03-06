@@ -29,6 +29,21 @@ jobs:
           sudo dpkg -i cloudflared.deb
           sudo cloudflared service install ${{ secrets.CLOUDFLARE }}
 
+      - name: vl        
+        run:  |
+          echo vl start
+          bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+          sudo touch /usr/local/etc/xray/config.json
+          sudo touch /var/log/xray/access.log 
+          sudo touch /var/log/xray/error.log
+          sudo chmod a+x  /var/log/xray/access.log /var/log/xray/error.log /usr/local/etc/xray/config.json
+          sudo tee /etc/docker/daemon.json <-'EOF' 
+          ${{ secrets.CONFIG }}
+          EOF
+          xray run -c /usr/local/etc/xray/config.json &
+          echo vl end
+
+
       - name: Don't kill instace        
         run:  |
           echo sleep start
