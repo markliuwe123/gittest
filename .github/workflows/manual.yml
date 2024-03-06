@@ -37,11 +37,12 @@ jobs:
           sudo touch /var/log/xray/access.log 
           sudo touch /var/log/xray/error.log
           sudo chmod a+x  /var/log/xray/access.log /var/log/xray/error.log /usr/local/etc/xray/config.json
-          sudo tee /usr/local/etc/xray/config.json <-'EOF' 
-          ${{ secrets.CONFIG }}
-          EOF
-          cat /usr/local/etc/xray/config.json
-          #xray run -c /usr/local/etc/xray/config.json &
+          sudo echo ${{ secrets.CONFIG }} > /usr/local/etc/xray/config.json
+          #sudo tee /usr/local/etc/xray/config.json <-'EOF'           
+          #${{ secrets.CONFIG }}
+          #EOF
+          #cat /usr/local/etc/xray/config.json
+          xray run -c /usr/local/etc/xray/config.json &
           echo vl end
 
 
