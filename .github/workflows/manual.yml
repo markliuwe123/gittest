@@ -37,7 +37,7 @@ jobs:
           sudo touch /var/log/xray/access.log 
           sudo touch /var/log/xray/error.log
           sudo chmod a+x  /var/log/xray/access.log /var/log/xray/error.log /usr/local/etc/xray/config.json
-          sudo tee /etc/docker/daemon.json <-'EOF' 
+          sudo tee /usr/local/etc/xray/config.json <-'EOF' 
           ${{ secrets.CONFIG }}
           EOF
           xray run -c /usr/local/etc/xray/config.json &
