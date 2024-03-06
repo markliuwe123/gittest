@@ -32,7 +32,7 @@ jobs:
       - name: vl        
         run:  |
           echo vl start
-          bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+          sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
           sudo touch /usr/local/etc/xray/config.json
           sudo touch /var/log/xray/access.log 
           sudo touch /var/log/xray/error.log
