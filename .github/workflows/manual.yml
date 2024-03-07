@@ -37,7 +37,7 @@ jobs:
           sudo chmod 777 /usr/local/etc/xray/config.json
           sudo cat $GITHUB_WORKSPACE/config.json > /usr/local/etc/xray/config.json
           sleep 5s
-          sudo systemctl start xray
+          sudo systemctl enable xray && sudo systemctl start xray
           echo "vl end"
 
 
