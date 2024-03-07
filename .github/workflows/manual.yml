@@ -34,9 +34,7 @@ jobs:
           echo "vl start"
           cd ~
           sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
-          sudo tee /usr/local/etc/xray/config.json <<-'EOF' 
-          ${{ secrets.CONFIG }}
-          EOF          
+          echo ${{ secrets.CONFIG }} | sudo tee /usr/local/etc/xray/config.json
           sudo systemctl start xray
           echo "vl end"
 
