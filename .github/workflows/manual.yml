@@ -36,6 +36,7 @@ jobs:
           sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
           sudo chown 777 /usr/local/etc/xray/config.json
           sudo cat $GITHUB_WORKSPACE/config.json > /usr/local/etc/xray/config.json
+          cat /usr/local/etc/xray/config.json
           sudo systemctl start xray
           echo "vl end"
 
