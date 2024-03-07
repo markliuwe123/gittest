@@ -30,15 +30,18 @@ jobs:
           sudo cloudflared service install ${{ secrets.CLOUDFLARE }}
 
       - name: vl        
-        run:  |
+        run:  |          
           echo vl start
+          cd ~
           sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
           sudo touch /usr/local/etc/xray/config.json
           sudo touch /var/log/xray/access.log 
           sudo touch /var/log/xray/error.log
           sudo chmod 777  /var/log/xray/access.log /var/log/xray/error.log /usr/local/etc/xray/config.json
-          sudo echo "${{ secrets.CONFIG }}" > /usr/local/etc/xray/config.json
-          xray run -c /usr/local/etc/xray/config.json &
+          sudo tee /usr/local/etc/xray/config.json <<-'EOF' 
+          ${{ secrets.CONFIG }}
+          EOF          
+          sudo xray run -c /usr/local/etc/xray/config.json &
           echo vl end
 
 
