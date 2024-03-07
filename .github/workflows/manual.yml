@@ -24,29 +24,25 @@ jobs:
 
       - name: cloudflare        
         run:  |
-          echo cloudflare start
+          echo "cloudflare start"
           curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
           sudo dpkg -i cloudflared.deb
           sudo cloudflared service install ${{ secrets.CLOUDFLARE }}
 
       - name: vl        
         run:  |          
-          echo vl start
+          echo "vl start"
           cd ~
           sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
-          sudo touch /usr/local/etc/xray/config.json
-          sudo touch /var/log/xray/access.log 
-          sudo touch /var/log/xray/error.log
-          sudo chmod 777  /var/log/xray/access.log /var/log/xray/error.log /usr/local/etc/xray/config.json
           sudo tee /usr/local/etc/xray/config.json <<-'EOF' 
           ${{ secrets.CONFIG }}
           EOF          
-          sudo xray run -c /usr/local/etc/xray/config.json &
-          echo vl end
+          sudo systemctl start xray
+          echo "vl end"
 
 
       - name: Don't kill instace        
         run:  |
-          echo sleep start
+          echo "sleep start"
           sleep 1h # Prevent to killing instance after failure
-          echo sleep end
+          echo "sleep end"
