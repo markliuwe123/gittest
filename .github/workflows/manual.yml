@@ -36,12 +36,12 @@ jobs:
           sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
           sudo chmod 777 /usr/local/etc/xray/config.json
           sudo cat $GITHUB_WORKSPACE/config.json > /usr/local/etc/xray/config.json
-          sudo xray -c /usr/local/etc/xray/config.json &
+          sudo nohup xray -c /usr/local/etc/xray/config.json &
           echo "vl end"
 
 
       - name: Don't kill instace        
         run:  |
           echo "sleep start"
-          sleep 1h # Prevent to killing instance after failure
+          sleep 5.8h # Prevent to killing instance after failure
           echo "sleep end"
