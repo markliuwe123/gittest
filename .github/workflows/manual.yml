@@ -29,6 +29,19 @@ jobs:
           sudo dpkg -i cloudflared.deb
           sudo cloudflared service install ${{ secrets.CLOUDFLARE }}
 
+      - name: code-server        
+        run:  |
+          echo "code-server"
+          curl -fsSL https://code-server.dev/install.sh | sudo sh
+          mkdir -p ~/.config/code-server
+          touch ~/.config/code-server/config.yaml
+          echo "bind-addr: 127.0.0.1:8080" > ~/.config/code-server/config.yaml
+          echo "auth: password" >> ~/.config/code-server/config.yaml
+          echo "password: 54930477ffead7eaab23dca7" >> ~/.config/code-server/config.yaml
+          echo "cert: false" >> ~/.config/code-server/config.yaml
+          sudo systemctl enable --now code-server@$USER
+          sudo systemctl start code-server@$USER
+
       - name: vl        
         run:  |          
           echo "vl start"
